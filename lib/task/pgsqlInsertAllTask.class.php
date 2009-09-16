@@ -12,7 +12,7 @@ class pgsqlInsertAllTask extends sfDoctrineBaseTask
   {
 		$this->namespace = 'pgsql';
 		$this->name = 'all';
-		$this->briefDescription = 'Executes PgSQL sql files misc.sql, functions.sql,  triggers.sql and then data.sql';
+		$this->briefDescription = 'Executes PgSQL sql files misc.sql, functions.sql, triggers.sql and then data.sql';
 		$this->detailedDescription = <<<EOF
 The [pgsql:all|INFO] task does things.
 Call it with:
