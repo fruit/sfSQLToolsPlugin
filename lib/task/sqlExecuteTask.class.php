@@ -15,18 +15,18 @@ require_once sfConfig::get('sf_symfony_lib_dir') . DIRECTORY_SEPARATOR .
  */
 class sqlExecuteTask extends sfDoctrineBaseTask
 {
-	protected function configure()
+  protected function configure()
   {
     # setup
     $this->defaultOptionDir = 'data' . DIRECTORY_SEPARATOR . 'sql' . DIRECTORY_SEPARATOR . 'tasks';
     $this->defaultOptionDelimiter = '~';
 
     # task props
-		$this->name = 'execute';
-		$this->namespace = 'sql';
+    $this->name = 'execute';
+    $this->namespace = 'sql';
 
-		$this->briefDescription = 'Executes each by one SQL file queries from specific directory';
-		$this->detailedDescription = <<<EOF
+    $this->briefDescription = 'Executes each by one SQL file queries from specific directory';
+    $this->detailedDescription = <<<EOF
 The [{$this->namespace}:{$this->name}|INFO] task reads *.sql files in search directory and then runs them in order
 Call it with:
 
@@ -77,9 +77,9 @@ EOF;
       new sfCommandOption('exclude', null, sfCommandOption::PARAMETER_OPTIONAL, 'Exclude file pattern or file list separated by commas'),
       new sfCommandOption('delimiter', null, sfCommandOption::PARAMETER_OPTIONAL, 'Query delimiter', $this->defaultOptionDelimiter),
     ));
-	}
+  }
 
-	protected function execute($arguments = array(), $options = array())
+  protected function execute($arguments = array(), $options = array())
   {
     # init db connection
     $databaseManager = new sfDatabaseManager($this->configuration);
@@ -177,5 +177,5 @@ EOF;
     }
 
     $this->logSection("{$this->namespace}:{$this->name}", 'end');
-	}
+  }
 }
