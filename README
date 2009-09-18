@@ -1,0 +1,100 @@
+# sfSQLToolsPlugin #
+
+> The `sfSQLToolsPlugin` is a symfony plugin that provides easy way to execute database specific features like stored procedures, triggers, events and any other ``SQL`` commands.
+
+## Contents ##
+
+> It gives you one task to execute ``SQL`` files with additional options to exclude extra files.
+
+## Installation ##
+
+   * Install the plugin
+
+        $ ./symfony plugin:install sfSQLToolsPlugin
+
+   * Clear you cache
+
+        $ ./symfony cc
+
+## Usage ##
+
+ > ``$ ./symfony sql:execute [--application[="..."]] [--env[="..."]] [--dir[="..."]] [--file[="..."]] [--exclude[="..."]] [--delimiter[="..."]]``
+
+### Options: ###
+ * ``--application``  The application name (default: 1)
+ * ``--env``          The environement (default: dev)
+ * ``--dir``          The directory where to look for ``*.sql`` file (default: ``data/sql/tasks``)
+ * ``--file``         One file to be executed
+ * ``--exclude``      Exclude file pattern or file list separated by commas
+ * ``--delimiter``    Query delimiter (default: ~)
+
+### Description: ###
+ > The ``sql:execute`` task reads ``*.sql`` files in search directory and then runs them in order
+
+   * Call it with:
+
+        $ ./symfony sql:execute
+
+   * To work in certain environment run this command with ``--env`` option
+
+        $ ./symfony sql:execute --env=prod
+
+   * To use certain application`s database settings use ``--application`` option
+
+        $ ./symfony sql:execute --application=frontend
+
+   * If you need to customize the ``*.sql`` location dirname (default is ``*data/sql/tasks*``), you can pass a ``--dir`` option:
+
+        $ ./symfony sql:execute --dir=data/my/folder
+
+   * To exclude one or more files from ``--dir`` folder use ``--exclude`` option. In order to exclude ``"00-misc.sql"`` file from ``"data/my/folder"`` directory use:
+
+        $ ./symfony sql:execute --dir=data/my/folder --exclude="00-misc.sql"
+
+   * In order to exclude many files from ``"data/my/folder"`` directory, separate is by commas:
+
+        $ ./symfony sql:execute --dir=data/my/folder --exclude="00-misc.sql, 10-triggers.sql, 20-events.sql"
+
+   * Or you can use *glob* patterns (exclude all filename which contains words: U_"old"_ and _"backup"_):
+
+        $ ./symfony sql:execute --dir=data/my/folder --exclude="*old*,*backup*"
+
+   * To run only one specific ``SQL`` file use ``--file``:
+
+        $ ./symfony sql:execute --file=data/sql/tasks_1/alter-tables.sql
+
+   * or
+
+        $ ./symfony sql:execute --dir=data/sql/tasks_1 --file=alter-tables.sql
+
+## Example ##
+
+### This is your file "00-procedures.sql" content (MySQL) ###
+
+        CREATE PROCEDURE `simpleproc`(OUT param1 INT)
+        BEGIN
+            SELECT COUNT(*) INTO param1 FROM t;
+        END
+        ~
+        CREATE FUNCTION `hello`(s CHAR(20)) RETURNS CHAR(50)  RETURN CONCAT('Hello, ',s,'!');
+        ~
+        CREATE PROCEDURE molo() SELECT 'Molo';
+
+   * Now, setup your DBMS conntecion in config/databases.yml (if you haven't done this yet)
+
+   * And execute this procedures in development environment:
+
+        $ ./symfony sql:execute --env=dev --file=data/sql/00-procedures.sql
+
+   * After you run this task, you should recieve output:
+
+        >> sql:execute start
+        >> sql:execute [00-procedures.sql] CREATE PROC...OUNT(*) INTO param1 FROM t; END
+        >> sql:execute [00-procedures.sql] CREATE FUNC...RETURN CONCAT('Hello, ',s,'!');
+        >> sql:execute [00-procedures.sql] CREATE PROCEDURE molo() SELECT 'Molo';
+        >> sql:execute end
+
+## TODO ##
+
+ * write unit tests [priority 3]
+ * check the spelling in English [priority 2]
