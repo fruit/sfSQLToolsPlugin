@@ -1,0 +1,11 @@
+CREATE PROCEDURE `simpleproc`(OUT param1 INT)
+BEGIN
+    DECLARE param1 INT;
+    DECLARE param2 INT;
+    SELECT COUNT(*) INTO param1 FROM t;
+    SELECT COUNT(*) INTO param2 FROM b;
+END;
+~
+CREATE FUNCTION `hello`(s CHAR(20)) RETURNS CHAR(50) RETURN CONCAT('Hello, ',s,'!');
+~
+CREATE PROCEDURE `molo`() SELECT 'Molo';

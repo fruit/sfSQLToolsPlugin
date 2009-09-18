@@ -13,7 +13,7 @@ require_once sfConfig::get('sf_symfony_lib_dir') . DIRECTORY_SEPARATOR .
  * @subpackage plugin
  * @author     Ilya Sabelnikov <fruit.dev@gmail.com>
  */
-class sqlExecuteTask extends sfDoctrineBaseTask
+class sfSqlExecuteTask extends sfDoctrineBaseTask
 {
   protected function configure()
   {
@@ -97,13 +97,13 @@ EOF;
         if (! is_file($specificFile))
         {
           $this->logSection("{$this->namespace}:{$this->name}", "file \"{$options['file']}\" does not exists");
-          return;
+          return false;
         }
       }
 
       $files = array($specificFile);
     }
-    else
+    elseif (is_dir($options['dir']))
     {
       /* @var $finder sfFinder */
       $finder = sfFinder::type('file')->name('*.sql');
@@ -126,9 +126,14 @@ EOF;
       }
 
       # sort files by name to be executed in order
-      $files = $finder->sort_by_name()->in($options['dir']);;
+      $files = $finder->sort_by_name()->in($options['dir']);
     }
-
+    else
+    {
+      $this->logSection("{$this->namespace}:{$this->name}", "directory \"{$options['dir']}\" does not exists");
+      return false;
+    }
+    
     $this->logSection("{$this->namespace}:{$this->name}", 'start');
 
     if (0 < count($files))
@@ -138,8 +143,6 @@ EOF;
         $fileBasename = basename($file, PATHINFO_BASENAME);
         try
         {
-          $con->beginTransaction();
-
           # delimit sql file content on separate queries
           foreach (explode($options['delimiter'], file_get_contents($file)) as $query)
           {
@@ -156,18 +159,16 @@ EOF;
 
             Doctrine_Manager::connection()->execute($query);
           }
-
-          $con->commit();
         }
         catch (Exception $e)
         {
-          $con->rollback();
-
           $queryOutput = mb_substr($queryOutput, 0, 15, 'utf8');
 
           $this->logSection("{$this->namespace}:{$this->name}", "[{$fileBasename}] \"{$queryOutput}\" marked to be skipped.", null, 'ERROR');
 
           $this->logSection("{$this->namespace}:{$this->name}", "[{$fileBasename}] \"{$queryOutput}\" reason: {$e->getMessage()}", 1000, 'ERROR');
+
+          return false;
         }
       }
     }
@@ -177,5 +178,7 @@ EOF;
     }
 
     $this->logSection("{$this->namespace}:{$this->name}", 'end');
+
+    return true;
   }
 }

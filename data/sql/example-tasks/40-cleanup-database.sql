@@ -1,0 +1,9 @@
+DROP PROCEDURE IF EXISTS `simpleproc`;
+~
+DROP FUNCTION IF EXISTS `hello`;
+~
+DROP PROCEDURE IF EXISTS `molo`;
+~
+DROP TABLE IF EXISTS `define`;
+~
+DROP TABLE IF EXISTS `locale`;
