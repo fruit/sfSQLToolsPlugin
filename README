@@ -94,6 +94,10 @@
         >> sql:execute [00-procedures.sql] CREATE PROCEDURE molo() SELECT 'Molo';
         >> sql:execute end
 
+## Repository ##
+
+ * plugin repository http://github.com/fruit/sfSQLToolsPlugin
+
 ## TODO ##
 
  * write unit tests [priority 3]
