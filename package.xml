@@ -12,7 +12,7 @@
  </lead> 
  <date>2009-09-18</date>
  <version>
-  <release>0.0.4</release>
+  <release>0.0.5</release>
   <api>0.0.1</api>
  </version>
  <stability>
@@ -25,9 +25,24 @@
   <dir name="/">
    <file name="LICENSE" role="data" />
    <file name="README" role="data" />
+   <dir name="data">
+     <dir name="sql">
+       <dir name="example-tasks">
+         <file name="10-create-tables.sql" role="data" />
+         <file name="20-inserts.sql" role="data" />
+         <file name="30-procedures.sql" role="data" />
+         <file name="40-cleanup-database.sql" role="data" />
+       </dir>
+     </dir>
+   </dir>
    <dir name="lib">
      <dir name="task">
-       <file name="sqlExecuteTask.class.php" role="data" />
+       <file name="sfSqlExecuteTask.class.php" role="data" />
+     </dir>
+   </dir>
+   <dir name="test">
+     <dir name="unit">
+      <file name="sfSqlExecuteTaskTest.php" role="data" />
      </dir>
    </dir>
   </dir>
@@ -53,6 +68,22 @@
  <changelog>
   <release>
    <version>
+    <release>0.0.5</release>
+    <api>0.0.1</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2009-09-18</date>
+   <license uri="http://www.symfony-project.com/license">MIT license</license>
+   <notes>
+     * ilya: renamed task php class name from ``sqlExecuteTask.class.php`` to ``sfSqlExecuteTask.class.php``
+     * ilya: created minimal amout of unit tests with sql examples (not full yet)
+   </notes>
+  </release>
+  <release>
+   <version>
     <release>0.0.4</release>
     <api>0.0.1</api>
    </version>
@@ -64,8 +95,8 @@
    <license uri="http://www.symfony-project.com/license">MIT license</license>
    <notes>
      * ilya: finished compatability with Windows platforms
-     * ilya: added require_once for doctrin base task not to trigger fatal error on Propel orientiered projects
-     * ilya: updated README file (example section)
+     * ilya: added require_once for doctrine base task not to trigger fatal error on ``Propel`` orientiered projects
+     * ilya: updated ``README`` file (example section)
    </notes>
   </release>
   <release>
@@ -80,8 +111,8 @@
    <date>2009-09-18</date>
    <license uri="http://www.symfony-project.com/license">MIT license</license>
    <notes>
-     * ilya: added "--delimiter" option
-     * ilya: updated README file
+     * ilya: added ``"--delimiter"`` option
+     * ilya: updated ``README`` file
    </notes>
   </release>
   <release>
