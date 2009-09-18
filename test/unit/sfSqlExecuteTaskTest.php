@@ -8,44 +8,80 @@
  * file that was distributed with this source code.
  */
 
-// initializes testing framework
-
 require_once realpath(dirname(__FILE__) . '/../../../../test/bootstrap/unit.php');
 require_once "{$configuration->getRootDir()}/plugins/sfSQLToolsPlugin/lib/task/sfSqlExecuteTask.class.php";
 
-$t = new lime_test(null, new lime_output_color());
+$t = new lime_test(14, new lime_output_color());
 
 $taskCommands = array(
   array('args' => array('somearg', 'someotherarg'), 'options' => array(), 'return' => false, 'incorrect' => true),
-  array('args' => array(), 'options' => array('--ff=1'), 'return' => false, 'incorrect' => true),
+  array('args' => array(), 'options' => array('--ff="1"'), 'return' => false, 'incorrect' => true),
   array(
     'args' => array(),
-    'options' => array('--env=devmysql', '--dir=plugins/sfSQLToolsPlugin/data/sql/example-tasks'),
+    'options' => array('--env="devmysql"', '--dir="plugins/sfSQLToolsPlugin/data/sql/example-tasks-0"'),
     'return' => true,
   ),
   array(
     'args' => array(),
-    'options' => array('--env=devmysql', '--dir=plugins/sfSQLToolsPlugin/data/sql/example-tasks', '--delimiter=@'),
-    'return' => false,
+    'options' => array('--env="devmysql"', '--dir="plugins/sfSQLToolsPlugin/data/sql/example-tasks-0"', '--delimiter="@"'),
+    'return' => false, # files are delimited by ~
   ),
   array(
     'args' => array(),
-    'options' => array('--env=devmysql', '--dir=plugins/sfSQLToolsPlugin/data/sql', '--file=10-create-tables.sql'),
-    'return' => false,
+    'options' => array('--env="devmysql"', '--dir="plugins/sfSQLToolsPlugin/data/sql"'),
+    'return' => false, # folder is empty
   ),
   array(
     'args' => array(),
-    'options' => array('--env=devmysql', '--dir=plugins/sfSQLToolsPlugin/data/sql/example-tasks', '--file=10-create-tables.sql'),
+    'options' => array('--env="devmysql"', '--dir="plugins/sfSQLToolsPlugin/data/sql"', '--dir-depth="1"'),
+    'return' => true, # folder has subfolders with sql files
+  ),
+  array(
+    'args' => array(),
+    'options' => array('--env="devmysql"', '--dir="plugins/sfSQLToolsPlugin"', '--dir-depth="*"'),
+    'return' => true, # folder has subfolders with sql files
+  ),
+  array(
+    'args' => array(),
+    'options' => array('--env="devmysql"', '--dir="plugins/sfSQLToolsPlugin"', '--dir-depth="1"'),
+    'return' => false, # folder subfolders does not have sql files
+  ),
+  array(
+    'args' => array(),
+    'options' => array('--env="devmysql"', '--dir="plugins/sfSQLToolsPlugin/data/sql"', '--file="10-create-tables.sql"'),
+    'return' => false, # directory does not exists
+  ),
+  array(
+    'args' => array(),
+    'options' => array('--env="devmysql"', '--dir="plugins/sfSQLToolsPlugin/data/sql/example-tasks-0"', '--file="10-create-tables.sql"'),
     'return' => true,
   ),
   array(
     'args' => array(),
-    'options' => array('--env=devmysql', '--file=plugins/sfSQLToolsPlugin/data/sql/10-create-tables.sql'),
-    'return' => false,
+    'options' => array('--env="devmysql"', '--file="plugins/sfSQLToolsPlugin/data/sql/10-create-tables.sql"'),
+    'return' => false, # file does not exists
   ),
   array(
     'args' => array(),
-    'options' => array('--env=devmysql', '--file=plugins/sfSQLToolsPlugin/data/sql/example-tasks/10-create-tables.sql'),
+    'options' => array('--env="devmysql"', '--file="plugins/sfSQLToolsPlugin/data/sql/example-tasks-0/10-create-tables.sql"'),
+    'return' => true,
+  ),
+  array(
+    'args' => array(),
+    'options' => array(
+      '--env="devmysql"',
+      '--dir="plugins/sfSQLToolsPlugin/data/sql/example-tasks-0"',
+      '--exclude="20-inserts.sql, 30-procedures.sql"'
+    ),
+    'return' => true,
+  ),
+  array(
+    'args' => array(),
+    'options' => array(
+      '--env="devmysql"',
+      '--dir="plugins/sfSQLToolsPlugin/data/sql/example-tasks-1"',
+      '--delimiter="/*sql*/"'
+    ),
     'return' => true,
   ),
 );
@@ -62,7 +98,7 @@ foreach ($taskCommands as $v)
   }
   catch (sfException $e)
   {
-    $t->is(isset($v['incorrect']), true, 'Too many arguments or unknown options');
+    $t->is(isset($v['incorrect']), true, 'Too many arguments or unknown options (exception triggered)');
   }
 }
 

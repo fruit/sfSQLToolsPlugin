@@ -67,15 +67,26 @@ or
 To setup your custom delimiter to separete SQL queries use [--delimiter|COMMENT] option:
 
   [./symfony {$this->namespace}:{$this->name} --delimiter="@"|INFO]
+
+To search for *.sql file until sub certain-folder level use [--dir-depth|COMMENT] option:
+
+  [./symfony {$this->namespace}:{$this->name} --dir-depth=5|INFO]
+
+To search for *.sql file recursively pass "*" to [--dir-depth|COMMENT] option:
+
+  [./symfony {$this->namespace}:{$this->name} --dir-depth=*|INFO]
+
 EOF;
 
     $this->addOptions(array(
       new sfCommandOption('application', null, sfCommandOption::PARAMETER_OPTIONAL, 'The application name', true),
       new sfCommandOption('env', null, sfCommandOption::PARAMETER_OPTIONAL, 'The environement', 'dev'),
       new sfCommandOption('dir', null, sfCommandOption::PARAMETER_OPTIONAL, 'The directory where to look for *.sql file', $this->defaultOptionDir),
+      new sfCommandOption('dir-depth', null, sfCommandOption::PARAMETER_OPTIONAL, 'Search directory depth', 0),
       new sfCommandOption('file', null, sfCommandOption::PARAMETER_OPTIONAL, 'One file to be executed'),
       new sfCommandOption('exclude', null, sfCommandOption::PARAMETER_OPTIONAL, 'Exclude file pattern or file list separated by commas'),
       new sfCommandOption('delimiter', null, sfCommandOption::PARAMETER_OPTIONAL, 'Query delimiter', $this->defaultOptionDelimiter),
+
     ));
   }
 
@@ -123,6 +134,23 @@ EOF;
         }
 
         $finderCallable->call($clearedExcludedFilenames);
+      }
+
+      $depth = $options['dir-depth'];
+
+      if ($depth === '*')
+      {
+        # recursively
+      }
+      elseif (0 <= $depth)
+      {
+        $finder->maxdepth((int) $depth);
+      }
+      else
+      {
+        $this->logSection("{$this->namespace}:{$this->name}", "incorrect value passed to 'dir-depth' - \"{$options['dir-depth']}\"");
+        
+        return false;
       }
 
       # sort files by name to be executed in order
@@ -175,6 +203,8 @@ EOF;
     else
     {
       $this->logSection("{$this->namespace}:{$this->name}", 'no sql files found');
+      
+      return false;
     }
 
     $this->logSection("{$this->namespace}:{$this->name}", 'end');

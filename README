@@ -18,12 +18,13 @@
 
 ## Usage ##
 
- > ``$ ./symfony sql:execute [--application[="..."]] [--env[="..."]] [--dir[="..."]] [--file[="..."]] [--exclude[="..."]] [--delimiter[="..."]]``
+ > ``$ ./symfony sql:execute [--application[="..."]] [--env[="..."]] [--dir[="..."]] [--dir-depth[="..."]] [--file[="..."]] [--exclude[="..."]] [--delimiter[="..."]]``
 
 ### Options: ###
  * ``--application``  The application name (default: 1)
  * ``--env``          The environement (default: dev)
  * ``--dir``          The directory where to look for ``*.sql`` file (default: ``data/sql/tasks``)
+ * ``--dir-depth``    Search directory depth (default: 0)
  * ``--file``         One file to be executed
  * ``--exclude``      Exclude file pattern or file list separated by commas
  * ``--delimiter``    Query delimiter (default: ~)
@@ -67,6 +68,15 @@
 
         $ ./symfony sql:execute --dir=data/sql/tasks_1 --file=alter-tables.sql
 
+   * To search for *.sql file until sub folder certain level use ``--dir-depth`` option:
+
+        $ ./symfony sql:execute --dir-depth=5
+
+   * To search for *.sql file recursively pass "*" to ``--dir-depth`` option:
+
+        $ ./symfony sql:execute --dir-depth=*|INFO]
+
+
 ## Example ##
 
 ### This is your file "00-procedures.sql" content (MySQL) ###
@@ -99,7 +109,10 @@
  * plugin repository http://github.com/fruit/sfSQLToolsPlugin
  * plugin tickets http://github.com/fruit/sfSQLToolsPlugin/issues
 
+## Unit test ##
+
+ * Unit tests (14 of 14) successfully completed (tested with ``MySQL 5.0.84`` and ``PostgreSQL 8.3.8``)
+
 ## TODO ##
 
- * write unit tests [priority 3]
  * check the spelling in English [priority 2]
