@@ -6,6 +6,11 @@
 
 > It gives you one task to execute ``SQL`` files with additional options to exclude extra files.
 
+## Repository ##
+
+ * plugin repository @ github [http://github.com/fruit/sfSQLToolsPlugin](http://github.com/fruit/sfSQLToolsPlugin "Repository")
+ * plugin tickets @ github [http://github.com/fruit/sfSQLToolsPlugin/issues](http://github.com/fruit/sfSQLToolsPlugin/issues "Issues")
+
 ## Installation ##
 
    * Install the plugin
@@ -22,7 +27,7 @@
 
 ### Options: ###
  * ``--application``  The application name (default: 1)
- * ``--env``          The environement (default: dev)
+ * ``--env``          The environment (default: dev)
  * ``--dir``          The directory where to look for ``*.sql`` file (default: ``data/sql/tasks``)
  * ``--dir-depth``    Search directory depth (default: 0)
  * ``--file``         One file to be executed
@@ -103,11 +108,6 @@
         >> sql:execute [00-procedures.sql] CREATE FUNC...RETURN CONCAT('Hello, ',s,'!');
         >> sql:execute [00-procedures.sql] CREATE PROCEDURE molo() SELECT 'Molo';
         >> sql:execute end
-
-## Repository ##
-
- * plugin repository http://github.com/fruit/sfSQLToolsPlugin
- * plugin tickets http://github.com/fruit/sfSQLToolsPlugin/issues
 
 ## Unit test ##
 

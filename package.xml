@@ -10,23 +10,28 @@
   <email>fruit.dev@gmail.com</email>
   <active>yes</active>
  </lead> 
- <date>2009-09-19</date>
+ <date>2009-09-20</date>
  <version>
-  <release>0.1.0</release>
-  <api>0.1.0</api>
+  <release>1.0.0</release>
+  <api>1.0.0</api>
  </version>
  <stability>
-  <release>beta</release>
-  <api>beta</api>
+  <release>stable</release>
+  <api>stable</api>
  </stability>
- <license uri="http://www.symfony-project.com/license">MIT license</license>
+ <license uri="http://www.symfony-project.com/license">MIT</license>
  <notes>-</notes>
  <contents>
   <dir name="/">
    <file name="LICENSE" role="data" />
    <file name="README" role="data" />
-   <dir name="data">
-     <dir name="sql">
+   <dir name="lib">
+     <dir name="task">
+       <file name="sfSqlExecuteTask.class.php" role="data" />
+     </dir>
+   </dir>
+   <dir name="test">
+     <dir name="data">
        <dir name="example-tasks-0">
          <file name="10-create-tables.sql" role="data" />
          <file name="20-inserts.sql" role="data" />
@@ -37,13 +42,6 @@
          <file name="standalone.sql" role="data" />
        </dir>
      </dir>
-   </dir>
-   <dir name="lib">
-     <dir name="task">
-       <file name="sfSqlExecuteTask.class.php" role="data" />
-     </dir>
-   </dir>
-   <dir name="test">
      <dir name="unit">
       <file name="sfSqlExecuteTaskTest.php" role="data" />
      </dir>
@@ -71,6 +69,22 @@
  <changelog>
   <release>
    <version>
+    <release>1.0.0</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-09-20</date>
+   <license uri="http://www.symfony-project.com/license">MIT</license>
+   <notes>
+     * ilya: logical fix - example folder with SQL files moved closer to unit test folder
+     * ilya: minor fixs in unit tests
+   </notes>
+  </release>
+  <release>
+   <version>
     <release>0.1.0</release>
     <api>0.1.0</api>
    </version>
@@ -79,7 +93,7 @@
     <api>beta</api>
    </stability>
    <date>2009-09-19</date>
-   <license uri="http://www.symfony-project.com/license">MIT license</license>
+   <license uri="http://www.symfony-project.com/license">MIT</license>
    <notes>
      * ilya: added ``--dir-depth`` option to specify directory search depth
      * ilya: fully created unit tests
@@ -95,7 +109,7 @@
     <api>alpha</api>
    </stability>
    <date>2009-09-18</date>
-   <license uri="http://www.symfony-project.com/license">MIT license</license>
+   <license uri="http://www.symfony-project.com/license">MIT</license>
    <notes>
      * ilya: renamed task php class name from ``sqlExecuteTask.class.php`` to ``sfSqlExecuteTask.class.php``
      * ilya: created minimal amout of unit tests with sql examples (not full yet)
@@ -111,7 +125,7 @@
     <api>alpha</api>
    </stability>
    <date>2009-09-18</date>
-   <license uri="http://www.symfony-project.com/license">MIT license</license>
+   <license uri="http://www.symfony-project.com/license">MIT</license>
    <notes>
      * ilya: finished compatability with Windows platforms
      * ilya: added require_once for doctrine base task not to trigger fatal error on ``Propel`` orientiered projects
@@ -128,7 +142,7 @@
     <api>alpha</api>
    </stability>
    <date>2009-09-18</date>
-   <license uri="http://www.symfony-project.com/license">MIT license</license>
+   <license uri="http://www.symfony-project.com/license">MIT</license>
    <notes>
      * ilya: added ``--delimiter`` option
      * ilya: updated ``README`` file
@@ -144,7 +158,7 @@
     <api>alpha</api>
    </stability>
    <date>2009-09-17</date>
-   <license uri="http://www.symfony-project.com/license">MIT license</license>
+   <license uri="http://www.symfony-project.com/license">MIT</license>
    <notes>
      * ilya: initial version
    </notes>
