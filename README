@@ -4,7 +4,7 @@
 
 ## Contents ##
 
-> It gives you one task to execute ``SQL`` files with additional options to exclude extra files.
+> It gives you one task to execute ``SQL`` files with additional options.
 
 ## Repository ##
 
@@ -79,7 +79,7 @@
 
    * To search for *.sql file recursively pass "*" to ``--dir-depth`` option:
 
-        $ ./symfony sql:execute --dir-depth=*|INFO]
+        $ ./symfony sql:execute --dir-depth=*
 
 
 ## Example ##
@@ -111,8 +111,8 @@
 
 ## Unit test ##
 
- * Unit tests (14 of 14) successfully completed (tested with ``MySQL 5.0.84`` and ``PostgreSQL 8.3.8``)
-
-## TODO ##
-
- * check the spelling in English [priority 2]
+ * Unit tests (14 of 14) successfully completed.
+ * Tested with:
+    * ``MySQL 5.0.84``
+    * ``MySQL 5.1.40``
+    * ``PostgreSQL 8.3.8``
