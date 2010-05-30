@@ -10,9 +10,9 @@
     <email>fruit.dev@gmail.com</email>
     <active>yes</active>
   </lead>
-  <date>2009-12-19</date>
+  <date>2010-05-30</date>
   <version>
-    <release>1.0.1</release>
+    <release>1.0.2</release>
     <api>1.0.0</api>
   </version>
   <stability>
@@ -21,8 +21,7 @@
   </stability>
   <license uri="http://www.symfony-project.com/license">MIT</license>
   <notes>
-    * ilya: edited README
-    * ilya: unit tested with Symfony 1.4
+    * ilya: fixed package.xml
   </notes>
   <contents>
     <dir name="/">
@@ -63,12 +62,28 @@
         <name>symfony</name>
         <channel>pear.symfony-project.com</channel>
         <min>1.2.0</min>
-        <max>1.4.0</max>
+        <max>2.0.0</max>
+        <exclude>2.0.0</exclude>
       </package>
     </required>
   </dependencies>
   <phprelease />
   <changelog>
+    <release>
+      <version>
+        <release>1.0.2</release>
+        <api>1.0.0</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <date>2010-05-30</date>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <notes>
+        * ilya: fixed package.xml
+      </notes>
+    </release>
     <release>
       <version>
         <release>1.0.1</release>
