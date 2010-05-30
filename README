@@ -82,7 +82,6 @@ The ``sql:execute`` task reads ``*.sql`` files in search directory and then runs
 
         $ ./symfony sql:execute --dir-depth=*
 
-
 ## Example ##
 
 ### This is your file "00-procedures.sql" content (MySQL) ###
