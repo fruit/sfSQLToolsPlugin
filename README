@@ -70,7 +70,7 @@ The ``sql:execute`` task reads ``*.sql`` files in search directory and then runs
 
         $ ./symfony sql:execute --file=data/sql/tasks_1/alter-tables.sql
 
-   * or
+   * or to run one specific file in directory ``"data/sql/tasks_1"``
 
         $ ./symfony sql:execute --dir=data/sql/tasks_1 --file=alter-tables.sql
 
